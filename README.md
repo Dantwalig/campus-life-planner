@@ -1,6 +1,6 @@
 # Campus Life Planner
 
-**Live Demo:** [https://Dantwalig.github.io/campus-life-planner](https://Dantwalig.github.io/campus-life-planner)
+**Live Demo:** [https://Dantwalig.github.io/campus-life-planner](https://dantwalig.github.io/campus-life-planner/)
 
 **Demo Video:** [YouTube Link](https://youtu.be/your-video-id)
 
