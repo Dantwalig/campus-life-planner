@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Campus Life Planner</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+</head>
+<body>
+   <a class="skiplink" href="#main">Click here to skip to the main content</a>
+  
+  <header role="banner" class="site-header">
+    <div class="container">
+      <h1 id="app-title">Campus Life Planner</h1>
+      <p class="tagline">Stay on top and always organized to succeed.</p>
+    </div>
+  </header>
+
+  <nav role="navigation" aria-label="Primary">
+    <div class="container nav-controls">
+      <button id="add-btn" aria-haspopup="dialog">+ New</button>
+      <input id="search-input" aria-label="Search events and tasks" placeholder="Search (regex allowed)" />
+      <select id="sort-select" aria-label="Sort by">
+        <option value="date">Date</option>
+        <option value="title">Title</option>
+        <option value="duration">Duration</option>
+      </select>
+      <button id="export-btn" aria-label="Export JSON">Export</button>
+      <input id="import-file" type="file" accept="application/json" aria-label="Import JSON" />
+    </div>
+  </nav>
+
+  <main id="main" role="main" tabindex="-1" class="container">
+    <section aria-labelledby="list-heading" id="list-region">
+      <h2 id="list-heading">Your tasks & events</h2>
+      <div id="empty-state" role="status" hidden>
+        <p>No items yet. Use <kbd>n</kbd> or the "+ New" button to create one.</p>
+      </div>
+      <ul id="items-list" aria-live="polite"></ul>
+    </section>
+
+    <aside aria-labelledby="form-heading" id="form-region">
+      <h2 id="form-heading">Create or edit</h2>
+      <form id="item-form" aria-describedby="form-instructions">
+        <div id="form-instructions">
+          Fill in title, description, date/time, duration (HH:MM), and tags (separate tags with a comma).
+        </div>
+
+        <label for="title">Title</label>
+        <input id="title" name="title" required />
+        <div class="hint" id="title-hint" aria-live="polite"></div>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description"></textarea>
+
+        <label for="date">Date & time</label>
+        <input id="date" name="date" type="datetime-local" />
+
+        <label for="duration">Duration (HH:MM)</label>
+        <input id="duration" name="duration" placeholder="e.g., 01:30" aria-describedby="duration-hint" />
+     
+        <label for="tags">Tags (separate tags with a comma)</label>
+        <input id="tags" name="tags" />
+
+        <div class="form-actions">
+          <button type="submit" id="save-btn">Save</button>
+          <button type="button" id="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </aside>
+  </main>
+
+  <div id="live" aria-live="assertive" aria-atomic="true" class="visually-hidden"></div>
+
+  <footer role="contentinfo" class="container">
+    <p>Campus Life Planner, your assistant to better plan your day.</p>
+  </footer>
+
+  <script type="module" src="scripts/main.js"></script>
+</body>
+</html>
