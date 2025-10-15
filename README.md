@@ -4,6 +4,8 @@
 
 **Demo Video:** [YouTube Link](https://youtu.be/your-video-id)
 
+**Figma Design:** [View Design Mockups](https://www.figma.com/design/3rr9UMgkjUeAS2JQXtoF8C/Untitled?node-id=0-1&t=QBE1nG5NG0jLGDPU-1)
+
 A responsive, accessible web application for managing campus tasks and events. Built with vanilla HTML, CSS, and JavaScript.
 
 ---
@@ -49,7 +51,7 @@ A responsive, accessible web application for managing campus tasks and events. B
 
 ### 1. **Title Validation** (Advanced with Positive Lookahead)
 - **Pattern:** `/^(?=.{2,})(?!\s+$).+/`
-- **Purpose:** Ensures title is at least 2 characters (blanc space does not count)
+- **Purpose:** Ensures title is at least 2 characters (blank space does not count)
 - **Techniques:** Positive lookahead `(?=.{2,})`, negative lookahead `(?!\s+$)`
 - **Examples:**
   - ✅ Valid: `"CS Assignment"`, `"Project Meeting"`, `"Dr"`
@@ -88,7 +90,7 @@ A responsive, accessible web application for managing campus tasks and events. B
 ## ⌨️ Keyboard Shortcuts
 
 | Key | Action |
-
+|-----|--------|
 | `n` | Create new task/event |
 | `Ctrl/Cmd + S` | Save current form |
 | `Enter` (on list item) | Edit selected item |
@@ -241,10 +243,12 @@ The `seed.json` file contains 10 diverse records demonstrating:
 ## 🎨 Design Decisions
 
 ### Color Palette
-- **Background:** `#1e2030` (Dark navy)
-- **Accent:** `#f9e400` (Yellow for CTAs)
+- **Background:** `#2b2d42` (Dark navy)
+- **Accent:** `#f9e71e` (Yellow for CTAs)
 - **Text:** `#ffffff` (White for readability)
-- **Borders:** `#2a2d3e` (Subtle separation)
+- **Borders:** `#3a3d52` (Subtle separation)
+- **Input Background:** `#e8e8e8` (Light gray)
+- **Input Text:** `#333` (Dark gray)
 
 ### Typography
 - **Font:** Inter (with system fallbacks)
@@ -319,3 +323,5 @@ The `seed.json` file contains 10 diverse records demonstrating:
 For questions or feedback about this project:
 - **GitHub:** [Dantwalig](https://github.com/Dantwalig)
 - **Email:** d.gakumban@alustudent.com
+
+---
