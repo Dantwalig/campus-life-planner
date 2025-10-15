@@ -9,19 +9,22 @@
   <link rel="stylesheet" href="styles/animations.css" />
 </head>
 <body>
-   <a class="skiplink" href="#main">Click here to skip to the main content</a>
-  
+  <a class="skiplink" href="#main">Skip to main content</a>
+
   <header role="banner" class="site-header">
-    <div class="container">
-      <h1 id="app-title">Campus Life Planner</h1>
-      <p class="tagline">Stay on top and always organized to succeed.</p>
+    <div class="container header-flex">
+      <img src="assets/Campus life planner Logo.png" alt="Campus Life Planner logo" class="logo" />
+      <div>
+        <h1 id="app-title">CAMPUS LIFE PLANNER (CLP)</h1>
+        <p class="tagline">Stay on top and always organized to succeed</p>
+      </div>
     </div>
   </header>
 
   <nav role="navigation" aria-label="Primary">
     <div class="container nav-controls">
       <button id="add-btn" aria-haspopup="dialog">+ New</button>
-      <input id="search-input" aria-label="Search events and tasks" placeholder="Search (regex allowed)" />
+      <input id="search-input" type="text" aria-label="Search events and tasks" placeholder="Search" />
       <select id="sort-select" aria-label="Sort by">
         <option value="date">Date</option>
         <option value="title">Title</option>
@@ -32,37 +35,31 @@
     </div>
   </nav>
 
+  <div id="live" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
   <main id="main" role="main" tabindex="-1" class="container">
-    <section aria-labelledby="list-heading" id="list-region">
-      <h2 id="list-heading">Your tasks & events</h2>
-      <div id="empty-state" role="status" hidden>
-        <p>No items yet. Use <kbd>n</kbd> or the "+ New" button to create one.</p>
-      </div>
-      <ul id="items-list" aria-live="polite"></ul>
-    </section>
-
     <aside aria-labelledby="form-heading" id="form-region">
-      <h2 id="form-heading">Create or edit</h2>
+      <h2 id="form-heading">Create or Edit</h2>
+      <p class="form-description">
+        Fill in title, description, date/time, duration (HH:MM), and tags (separate tags with a comma).
+      </p>
+
       <form id="item-form" aria-describedby="form-instructions">
-        <div id="form-instructions">
-          Fill in title, description, date/time, duration (HH:MM), and tags (separate tags with a comma).
-        </div>
+        <label for="title">Fill in the title</label>
+        <input id="title" name="title" type="text" placeholder="Title" required />
+        <span id="title-hint" class="hint" role="alert"></span>
 
-        <label for="title">Title</label>
-        <input id="title" name="title" required />
-        <div class="hint" id="title-hint" aria-live="polite"></div>
+        <label for="description">Fill in the description</label>
+        <textarea id="description" name="description" placeholder="Description"></textarea>
 
-        <label for="description">Description</label>
-        <textarea id="description" name="description"></textarea>
-
-        <label for="date">Date & time</label>
+        <label for="date">Fill in the date and time or choose from the picker</label>
         <input id="date" name="date" type="datetime-local" />
 
-        <label for="duration">Duration (HH:MM)</label>
-        <input id="duration" name="duration" placeholder="e.g., 01:30" aria-describedby="duration-hint" />
-     
-        <label for="tags">Tags (separate tags with a comma)</label>
-        <input id="tags" name="tags" />
+        <label for="duration">Fill in the duration in format (HH:MM)</label>
+        <input id="duration" name="duration" type="text" placeholder="01:30" />
+
+        <label for="tags">Fill in the tags and separate them with a comma (,)</label>
+        <input id="tags" name="tags" type="text" placeholder="Tags" />
 
         <div class="form-actions">
           <button type="submit" id="save-btn">Save</button>
@@ -70,12 +67,19 @@
         </div>
       </form>
     </aside>
+
+    <section aria-labelledby="list-heading" id="list-region">
+      <h2 id="list-heading">Your Tasks and Events</h2>
+      <div id="empty-state" role="status" hidden>
+        <p>No items yet. Use <kbd>n</kbd> or the "+ New" button to create one.</p>
+      </div>
+      <ul id="items-list" aria-live="polite"></ul>
+    </section>
   </main>
 
-  <div id="live" aria-live="assertive" aria-atomic="true" class="visually-hidden"></div>
-
-  <footer role="contentinfo" class="container">
-    <p>Campus Life Planner, your assistant to better plan your day.</p>
+  <footer role="contentinfo" class="footer">
+    <p><strong>CLP, your Bridge to better planning.</strong></p>
+    <p>Copyright © Daniel Gakumba Ntiwali. All rights reserved.</p>
   </footer>
 
   <script type="module" src="scripts/main.js"></script>
