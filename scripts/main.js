@@ -29,21 +29,24 @@ function loadInitial() {
   ui.loadSettings();
   ui.initSettingsModal();
   
-  const items = state.getItems();
-  if (!items || items.length === 0) {
-    fetch('seed.json')
-      .then(r => r.json())
-      .then(s => {
-        if (Array.isArray(s)) {
-          const norm = s.map(search.normalizeItemForRender);
-          state.setItems(norm);
-          refresh();
-        } else {
-          refresh();
-        }
-      })
-      .catch(()=>refresh());
-  } else refresh();
+  // Always fetch and load seed.json on app initialization
+  fetch('seed.json')
+    .then(r => r.json())
+    .then(s => {
+      if (Array.isArray(s)) {
+        const norm = s.map(search.normalizeItemForRender);
+        state.setItems(norm);
+        refresh();
+      } else {
+        refresh();
+      }
+    })
+    .catch(err => {
+      console.error('Failed to load seed.json:', err);
+      // If seed.json fails, try to load from localStorage
+      const items = state.getItems();
+      refresh();
+    });
 }
 
 addBtn.addEventListener('click', () => {
