@@ -3,6 +3,7 @@ import * as state from './state.js';
 import * as ui from './ui.js';
 import * as val from './validation.js';
 import * as search from './search.js';
+
 const addBtn = document.getElementById('add-btn');
 const searchInput = document.getElementById('search-input');
 const sortSelect = document.getElementById('sort-select');
@@ -11,33 +12,46 @@ const importFile = document.getElementById('import-file');
 const itemsList = document.getElementById('items-list');
 const form = document.getElementById('item-form');
 const cancelBtn = document.getElementById('cancel-btn');
+
 let editingId = null;
+
 function uid(prefix='id') {
   return `${prefix}_${Math.random().toString(36).slice(2,9)}`;
 }
+
 function refresh(re) {
   const items = state.getItems();
   ui.renderList(items, re);
+  ui.renderStats(items);
 }
+
 function loadInitial() {
+  ui.loadSettings();
+  ui.initSettingsModal();
+  
   const items = state.getItems();
   if (!items || items.length === 0) {
-    fetch('seed.json').then(r => r.json()).then(s => {
-      if (Array.isArray(s)) {
-        const norm = s.map(search.normalizeItemForRender);
-        state.setItems(norm);
-        refresh();
-      } else {
-        refresh();
-      }
-    }).catch(()=>refresh());
+    fetch('seed.json')
+      .then(r => r.json())
+      .then(s => {
+        if (Array.isArray(s)) {
+          const norm = s.map(search.normalizeItemForRender);
+          state.setItems(norm);
+          refresh();
+        } else {
+          refresh();
+        }
+      })
+      .catch(()=>refresh());
   } else refresh();
 }
+
 addBtn.addEventListener('click', () => {
   editingId = null;
   ui.clearForm();
   document.getElementById('title').focus();
 });
+
 searchInput.addEventListener('input', e => {
   const q = e.target.value.trim();
   if (q === '') {
@@ -52,8 +66,10 @@ searchInput.addEventListener('input', e => {
   }
   const filtered = search.filterByRegex(state.getItems(), re);
   ui.renderList(filtered, re);
+  ui.renderStats(filtered);
   ui.announce(`${filtered.length} result${filtered.length === 1 ? '' : 's'}`);
 });
+
 itemsList.addEventListener('click', e => {
   const btn = e.target.closest('button');
   if (!btn) return;
@@ -74,6 +90,7 @@ itemsList.addEventListener('click', e => {
     ui.announce('Item deleted');
   }
 });
+
 itemsList.addEventListener('keydown', e => {
   if (e.key === 'Delete' || e.key === 'd') {
     const li = e.target.closest('li');
@@ -95,6 +112,7 @@ itemsList.addEventListener('keydown', e => {
     document.getElementById('title').focus();
   }
 });
+
 form.addEventListener('submit', e => {
   e.preventDefault();
   const values = {
@@ -104,14 +122,16 @@ form.addEventListener('submit', e => {
     duration: document.getElementById('duration').value.trim(),
     tags: document.getElementById('tags').value
   };
+  
   const errors = val.validateForm(values);
-  const hint = document.getElementById('title-hint');
+  
+  ui.showFormErrors(errors);
+  
   if (Object.keys(errors).length > 0) {
-    hint.textContent = Object.values(errors).join('; ');
     ui.announce('Form has errors');
     return;
   }
-  hint.textContent = '';
+  
   const payload = {
     id: editingId || uid('item'),
     title: values.title,
@@ -122,6 +142,7 @@ form.addEventListener('submit', e => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   };
+  
   if (editingId) {
     state.updateItem(editingId, Object.assign({}, payload, { updatedAt: new Date().toISOString() }));
     ui.announce('Item updated');
@@ -133,10 +154,12 @@ form.addEventListener('submit', e => {
   ui.clearForm();
   refresh();
 });
+
 cancelBtn.addEventListener('click', () => {
   editingId = null;
   ui.clearForm();
 });
+
 exportBtn.addEventListener('click', () => {
   const url = storage.exportJson(state.getItems());
   const a = document.createElement('a');
@@ -147,6 +170,7 @@ exportBtn.addEventListener('click', () => {
   a.remove();
   ui.announce('Export started');
 });
+
 importFile.addEventListener('change', e => {
   const file = e.target.files[0];
   if (!file) return;
@@ -163,6 +187,7 @@ importFile.addEventListener('change', e => {
     importFile.value = '';
   });
 });
+
 sortSelect.addEventListener('change', () => {
   const v = sortSelect.value;
   const items = state.getItems().slice();
@@ -176,6 +201,7 @@ sortSelect.addEventListener('change', () => {
   state.setItems(items);
   refresh();
 });
+
 document.addEventListener('keydown', e => {
   if (e.key === 'n') {
     addBtn.click();
@@ -187,4 +213,33 @@ document.addEventListener('keydown', e => {
     e.preventDefault();
   }
 });
+
+function initAboutModal() {
+  const aboutBtn = document.getElementById('about-btn');
+  const aboutModal = document.getElementById('about-modal');
+  const closeAboutBtn = document.getElementById('close-about');
+  const aboutCloseBtn = document.getElementById('about-close-btn');
+  
+  if (!aboutBtn) return;
+  
+  aboutBtn.addEventListener('click', () => {
+    aboutModal.showModal();
+  });
+  
+  closeAboutBtn.addEventListener('click', () => {
+    aboutModal.close();
+  });
+  
+  aboutCloseBtn.addEventListener('click', () => {
+    aboutModal.close();
+  });
+  
+  aboutModal.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      aboutModal.close();
+    }
+  });
+}
+
 loadInitial();
+initAboutModal();

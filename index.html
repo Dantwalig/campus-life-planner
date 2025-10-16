@@ -32,12 +32,113 @@
       </select>
       <button id="export-btn" aria-label="Export JSON">Export</button>
       <input id="import-file" type="file" accept="application/json" aria-label="Import JSON" />
+      <button id="settings-btn" aria-label="Settings">⚙ Settings</button>
+      <button id="about-btn" aria-label="About Campus Life Planner">ℹ️ About</button>
     </div>
   </nav>
 
   <div id="live" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+  <div id="live-assertive" role="status" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
 
   <main id="main" role="main" tabindex="-1" class="container">
+    <section aria-labelledby="stats-heading" id="stats-region" class="stats-container">
+      <h2 id="stats-heading">Quick Stats</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Tasks</div>
+          <div class="stat-value" id="stat-total">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">This Week</div>
+          <div class="stat-value" id="stat-week">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Top Tag</div>
+          <div class="stat-value" id="stat-top-tag">–</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Duration</div>
+          <div class="stat-value" id="stat-total-duration">0h</div>
+        </div>
+      </div>
+      <div id="trend-chart" role="region" aria-labelledby="trend-title">
+        <h3 id="trend-title">7-Day Task Trend</h3>
+      </div>
+      <div id="cap-message" role="status" aria-live="assertive" class="cap-alert hidden"></div>
+    </section>
+
+    <dialog id="settings-modal" aria-labelledby="settings-title">
+      <div class="modal-content">
+        <h2 id="settings-title">Settings</h2>
+        <button id="close-settings" class="modal-close" aria-label="Close settings">×</button>
+        
+        <form id="settings-form">
+          <fieldset>
+            <legend>Duration Units</legend>
+            <label>
+              <input type="radio" name="duration-unit" value="hours" checked /> Hours & Minutes
+            </label>
+            <label>
+              <input type="radio" name="duration-unit" value="minutes" /> Total Minutes
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Weekly Duration Cap (minutes)</legend>
+            <label for="cap-input">Set a target (leave blank for no limit):</label>
+            <input id="cap-input" type="number" name="cap" min="0" placeholder="e.g., 1800" />
+            <small>Example: 1800 = 30 hours per week</small>
+          </fieldset>
+
+          <div class="modal-actions">
+            <button type="submit">Save Settings</button>
+            <button type="button" id="modal-cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <dialog id="about-modal" aria-labelledby="about-title">
+      <div class="modal-content">
+        <h2 id="about-title">About Campus Life Planner</h2>
+        <button id="close-about" class="modal-close" aria-label="Close about dialog">×</button>
+        
+        <div class="about-body">
+          <h3>Purpose</h3>
+          <p>
+            Campus Life Planner (CLP) helps students stay organized by managing tasks, events, and deadlines in one accessible interface. Track your commitments with custom tags, set weekly duration caps, and export your schedule anytime.
+          </p>
+          
+          <h3>Features</h3>
+          <ul>
+            <li>Create, edit, and delete tasks/events with full CRUD operations</li>
+            <li>Real-time regex search with safe pattern compilation</li>
+            <li>Duration tracking with configurable units (hours/minutes)</li>
+            <li>Weekly cap alerts with ARIA live announcements</li>
+            <li>JSON import/export with strict validation</li>
+            <li>Full keyboard navigation and screen reader support</li>
+            <li>Mobile-first responsive design</li>
+          </ul>
+          
+          <h3>Contact & Contribute</h3>
+          <p>
+            <strong>GitHub:</strong> <a href="https://github.com/Dantwalig/campus-life-planner" target="_blank">Dantwalig/campus-life-planner</a>
+          </p>
+          <p>
+            <strong>Email:</strong> <a href="mailto:d.gakumban@alustudent.com">d.gakumban@alustudent.com</a>
+          </p>
+          
+          <p style="margin-top: 2rem; font-size: 0.9rem; color: #999;">
+            Version 1.0.0 | Built with vanilla HTML, CSS, and JavaScript | No dependencies
+          </p>
+        </div>
+        
+        <div class="modal-actions">
+          <button type="button" id="about-close-btn">Close</button>
+        </div>
+      </div>
+    </dialog>
+
     <aside aria-labelledby="form-heading" id="form-region">
       <h2 id="form-heading">Create or Edit</h2>
       <p class="form-description">
@@ -54,12 +155,15 @@
 
         <label for="date">Fill in the date and time or choose from the picker</label>
         <input id="date" name="date" type="datetime-local" />
+        <span id="date-hint" class="hint" role="alert"></span>
 
         <label for="duration">Fill in the duration in format (HH:MM)</label>
         <input id="duration" name="duration" type="text" placeholder="01:30" />
+        <span id="duration-hint" class="hint" role="alert"></span>
 
         <label for="tags">Fill in the tags and separate them with a comma (,)</label>
         <input id="tags" name="tags" type="text" placeholder="Tags" />
+        <span id="tags-hint" class="hint" role="alert"></span>
 
         <div class="form-actions">
           <button type="submit" id="save-btn">Save</button>

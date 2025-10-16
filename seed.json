@@ -1,12 +1,122 @@
 [
-  {"id":"ev_001","title":"Orientation Meeting","description":"Intro to clubs & services bring ID","date":"2025-08-25T10:00:00","duration":"01:30","tags":["orientation","important"],"createdAt":"2025-08-01T09:00:00","updatedAt":"2025-08-01T09:00:00"},
-  {"id":"tsk_002","title":"Finish Web dev summative","description":"I need to finish the summative before the deadline","date":"2025-10-17T23:59:00","duration":"02:00","tags":["Assignment","Webdev"],"createdAt":"2025-10-08T12:00:00","updatedAt":"2025-10-15T12:00:00"},
-  {"id":"ev_003","title":"E-vuze Group Project Sprint","description":"Design meeting bring laptop. Room: LIB-201","date":"2025-09-12T14:00:00","duration":"03:00","tags":["project","group"],"createdAt":"2025-09-02T15:00:00","updatedAt":"2025-09-02T15:00:00"},
-  {"id":"tsk_004","title":"Guitar Club","description":"Open mic no experience needed","date":"2025-10-03T18:00:00","duration":"02:00","tags":["social","music"],"createdAt":"2025-09-12T08:00:00","updatedAt":"2025-09-12T08:00:00"},
-  {"id":"tsk_005","title":"Medical Appointment","description":"Dr. Kubaho annual checkup. Bring paperwork.","date":"2025-11-02T09:30:00","duration":"00:45","tags":["personal","health"],"createdAt":"2025-10-01T09:00:00","updatedAt":"2025-10-01T09:00:00"},
-  {"id":"ev_006","title":"Hackathon Kickoff","description":"15 min college hackathon snacks provided","date":"2025-10-17T08:00:00","duration":"48:00","tags":["hackathon","tech"],"createdAt":"2025-10-01T20:00:00","updatedAt":"2025-10-01T20:00:00"},
-  {"id":"tsk_007","title":"Read 'Modern Ecology' ch.2","description":"Important references and footnotes","date":"2025-09-21T20:00:00","duration":"01:20","tags":["reading","biology"],"createdAt":"2025-09-10T19:00:00","updatedAt":"2025-09-10T19:00:00"},
-  {"id":"tsk_008","title":"Volunteer: International Girl child Day","description":"we are to go visit 10 girls in kabuga to impact their lifes.","date":"2025-10-17T17:00:00","duration":"03:00","tags":["volunteer","community"],"createdAt":"2025-10-12T13:00:00","updatedAt":"2025-10-13T09:00:00"},
-  {"id":"ev_009","title":"office Hour","description":"meet with facilitator Bernard Lamptey to talk about my abscences","date":"2025-10-14T11:10:00","duration":"00:15","tags":["Office_hour","review"],"createdAt":"2025-10-13T10:21:00","updatedAt":"2025-10-13T10:21:00"},
-  {"id":"tsk_010","title":"Birthday: Annie","description":"Attend Annie's birthday at 18:00","date":"2025-10-18T18:00:00","duration":"05:00","tags":["personal","social","🎉"],"createdAt":"2025-11-15T10:00:00","updatedAt":"2025-11-15T10:00:00"}
+  {
+    "id": "ev_001",
+    "title": "Orientation Meeting",
+    "description": "Intro to clubs & services bring ID",
+    "date": "2025-08-25T10:00:00",
+    "duration": "01:30",
+    "tags": ["orientation", "important"],
+    "createdAt": "2025-08-01T09:00:00Z",
+    "updatedAt": "2025-08-01T09:00:00Z"
+  },
+  {
+    "id": "tsk_002",
+    "title": "Finish Web dev summative",
+    "description": "I need to finish the summative before the deadline - complete all features and ensure accessibility compliance for rubric",
+    "date": "2025-10-17T23:59:00",
+    "duration": "02:00",
+    "tags": ["Assignment", "Webdev"],
+    "createdAt": "2025-10-08T12:00:00Z",
+    "updatedAt": "2025-10-15T12:00:00Z"
+  },
+  {
+    "id": "ev_003",
+    "title": "E-vuze Group Project Sprint",
+    "description": "Design meeting bring laptop. Room: LIB-201 (Building 3, Floor 2, East Wing)",
+    "date": "2025-09-12T14:00:00",
+    "duration": "03:00",
+    "tags": ["project", "group"],
+    "createdAt": "2025-09-02T15:00:00Z",
+    "updatedAt": "2025-09-02T15:00:00Z"
+  },
+  {
+    "id": "tsk_004",
+    "title": "Guitar Club",
+    "description": "Open mic no experience needed - starts at 18:00 in Music Hall, Bring an instrument or join vocalists",
+    "date": "2025-10-03T18:00:00",
+    "duration": "02:00",
+    "tags": ["social", "music"],
+    "createdAt": "2025-09-12T08:00:00Z",
+    "updatedAt": "2025-09-12T08:00:00Z"
+  },
+  {
+    "id": "tsk_005",
+    "title": "Medical Appointment",
+    "description": "Dr. Kubaho annual checkup. Bring paperwork and insurance card.",
+    "date": "2025-11-02T09:30:00",
+    "duration": "00:45",
+    "tags": ["personal", "health"],
+    "createdAt": "2025-10-01T09:00:00Z",
+    "updatedAt": "2025-10-01T09:00:00Z"
+  },
+  {
+    "id": "ev_006",
+    "title": "Hackathon Kickoff",
+    "description": "48-hour coding marathon. College hackathon with snacks & prizes. Bring laptop, charger, and sleeping bag.",
+    "date": "2025-10-17T08:00:00",
+    "duration": "48:00",
+    "tags": ["hackathon", "tech"],
+    "createdAt": "2025-10-01T20:00:00Z",
+    "updatedAt": "2025-10-01T20:00:00Z"
+  },
+  {
+    "id": "tsk_007",
+    "title": "Read The Bible",
+    "description": "Important to read the Bible every day - focus on understanding and meditation",
+    "date": "2025-09-21T20:00:00",
+    "duration": "01:20",
+    "tags": ["reading", "spiritual"],
+    "createdAt": "2025-09-10T19:00:00Z",
+    "updatedAt": "2025-09-10T19:00:00Z"
+  },
+  {
+    "id": "tsk_008",
+    "title": "Volunteer: International Girl Child Day",
+    "description": "Visit 10 girls in Kabuga to impact their lives - distribute learning materials, school supplies & mentorship",
+    "date": "2025-10-17T17:00:00",
+    "duration": "03:00",
+    "tags": ["volunteer", "community"],
+    "createdAt": "2025-10-12T13:00:00Z",
+    "updatedAt": "2025-10-13T09:00:00Z"
+  },
+  {
+    "id": "ev_009",
+    "title": "Office Hour",
+    "description": "Meet with facilitator Bernard Lamptey to discuss absences & course progress - bring notebook",
+    "date": "2025-10-14T11:10:00",
+    "duration": "00:15",
+    "tags": ["Office_hour", "review"],
+    "createdAt": "2025-10-13T10:21:00Z",
+    "updatedAt": "2025-10-13T10:21:00Z"
+  },
+  {
+    "id": "tsk_010",
+    "title": "Birthday: Annie",
+    "description": "Attend Annie's birthday celebration at 18:00 - bring gift & be ready for karaoke! Venue: Central Hall",
+    "date": "2025-10-18T18:00:00",
+    "duration": "05:00",
+    "tags": ["personal", "social", "🎉"],
+    "createdAt": "2025-10-15T10:00:00Z",
+    "updatedAt": "2025-10-15T10:00:00Z"
+  },
+  {
+    "id": "tsk_011",
+    "title": "Driver License Exam",
+    "description": "Work on my driving skills and prepare for the written and practical tests - study the manual and practice driving with a licensed adult",
+    "date": "2024-01-15T09:00:00",
+    "duration": "00:30",
+    "tags": ["personal", "important"],
+    "createdAt": "2024-01-10T08:00:00Z",
+    "updatedAt": "2024-01-10T08:00:00Z"
+  },
+  {
+    "id": "tsk_012",
+    "title": "Edit E-vuze Pitchdeck",
+    "description": "Applying feedback from last meeting with Christopher focus on clarity, visuals, and key metrics",
+    "date": "2025-10-16T12:00:00",
+    "duration": "00:05",
+    "tags": ["project", "urgent"],
+    "createdAt": "2025-10-16T11:50:00Z",
+    "updatedAt": "2025-10-16T11:50:00Z"
+  }
 ]

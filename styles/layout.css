@@ -1,3 +1,297 @@
+.stats-container {
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background: #2a2d3e;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.stats-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.stat-card {
+  background: #1f2232;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+/* 7-Day Trend Chart */
+#trend-chart {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: #1f2232;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+#trend-chart h3 {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 150px;
+  gap: 0.5rem;
+}
+
+.chart-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 30px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.chart-bar:hover {
+  opacity: 0.8;
+}
+
+.bar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, var(--accent-color), #e6d41a);
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  transition: all 0.3s;
+}
+
+.chart-bar:hover .bar-fill {
+  filter: brightness(1.1);
+}
+
+.bar-label {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.cap-alert {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #8b4513;
+  color: #fff;
+  border-radius: 6px;
+  border-left: 4px solid #ff6b6b;
+  font-weight: 500;
+}
+
+.cap-alert.hidden {
+  display: none;
+}
+
+dialog {
+  border: none;
+  border-radius: 8px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  padding: 2rem;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.modal-close:hover {
+  background: var(--border-color);
+}
+
+.modal-close:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+#settings-title,
+#about-title {
+  margin-top: 0;
+}
+
+fieldset {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+legend {
+  padding: 0 0.5rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+fieldset label {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  font-weight: normal;
+}
+
+fieldset input[type="radio"],
+fieldset input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: auto;
+  cursor: pointer;
+}
+
+#cap-input {
+  margin-top: 0.5rem;
+}
+
+#settings-form small {
+  display: block;
+  color: #999;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* About Modal Styles */
+.about-body {
+  margin: 1.5rem 0;
+  line-height: 1.8;
+}
+
+.about-body h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--accent-color);
+}
+
+.about-body p {
+  margin-bottom: 0.75rem;
+  color: #ccc;
+}
+
+.about-body ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  list-style-type: disc;
+}
+
+.about-body li {
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
+
+.about-body a {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-color);
+  transition: opacity 0.2s;
+}
+
+.about-body a:hover {
+  opacity: 0.8;
+}
+
+.about-body a:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.modal-actions button {
+  min-width: 120px;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .stats-container {
+    padding: 2rem;
+  }
+
+  dialog {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+  }
+
+  .stats-container {
+    margin-bottom: 3rem;
+    padding: 2.5rem;
+  }
+}
+
 .site-header {
   background-color: var(--bg-color);
   border-bottom: 1px solid var(--border-color);
@@ -207,6 +501,7 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .nav-controls > * {
@@ -349,5 +644,11 @@ main {
   .footer {
     font-size: 1rem;
     padding: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar-fill {
+    transition: none;
   }
 }

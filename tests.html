@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CLP Tests - Regex Validation Suite</title>
+  <style>
+    :root {
+      --bg-color: #2b2d42;
+      --text-color: #ffffff;
+      --accent-color: #f9e71e;
+      --pass-color: #51cf66;
+      --fail-color: #ff6b6b;
+      --border-color: #3a3d52;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+    .subtitle {
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+    .test-suite {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #2a2d3e;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+    .test-suite h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+    }
+    .test-case {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: #1f2232;
+      border-radius: 6px;
+      border-left: 4px solid var(--border-color);
+    }
+    .test-case.pass {
+      border-left-color: var(--pass-color);
+    }
+    .test-case.fail {
+      border-left-color: var(--fail-color);
+      background: rgba(255, 107, 107, 0.1);
+    }
+    .test-label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .badge.pass {
+      background: var(--pass-color);
+      color: #000;
+    }
+    .badge.fail {
+      background: var(--fail-color);
+      color: #fff;
+    }
+    .test-input {
+      font-family: monospace;
+      color: #e8e8e8;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .test-expected {
+      font-size: 0.85rem;
+      color: #999;
+    }
+    .test-result {
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+    }
+    .result-pass {
+      color: var(--pass-color);
+    }
+    .result-fail {
+      color: var(--fail-color);
+    }
+    .pattern-ref {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #1f2232;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+    .pattern-ref strong {
+      color: var(--accent-color);
+    }
+    .stats {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: #2a2d3e;
+      border: 2px solid var(--accent-color);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stats-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Campus Life Planner – Test Suite</h1>
+    <p class="subtitle">Regex validation & pattern testing</p>
+    
+    <div id="results"></div>
+    
+    <div class="stats">
+      <p>Tests Run: <span class="stats-value" id="total">0</span></p>
+      <p style="margin-top: 0.5rem;">
+        <span style="color: var(--pass-color);">✓ Passed: <strong id="passed">0</strong></span>
+        &nbsp; | &nbsp;
+        <span style="color: var(--fail-color);">✗ Failed: <strong id="failed">0</strong></span>
+      </p>
+    </div>
+  </div>
+
+  <script>
+
+    class TestRunner {
+      constructor() {
+        this.results = [];
+        this.passed = 0;
+        this.failed = 0;
+      }
+
+      test(name, pattern, testCases, flags = 'u') {
+        const suite = {
+          name,
+          pattern: pattern.source || pattern,
+          flags,
+          cases: []
+        };
+
+        testCases.forEach(({ input, expected, description }) => {
+          try {
+            const regex = new RegExp(pattern, flags);
+            const result = regex.test(input);
+            const passed = result === expected;
+
+            suite.cases.push({
+              input,
+              expected,
+              result,
+              passed,
+              description
+            });
+
+            if (passed) this.passed++;
+            else this.failed++;
+          } catch (e) {
+            suite.cases.push({
+              input,
+              expected,
+              result: null,
+              passed: false,
+              error: e.message,
+              description
+            });
+            this.failed++;
+          }
+        });
+
+        this.results.push(suite);
+      }
+
+      render() {
+        const container = document.getElementById('results');
+        container.innerHTML = '';
+
+        this.results.forEach(suite => {
+          const html = `
+            <div class="test-suite">
+              <h2>${suite.name}</h2>
+              <div class="pattern-ref">
+                <strong>Pattern:</strong> <code>/${suite.pattern}/${suite.flags}</code>
+              </div>
+              ${suite.cases.map((tc, i) => `
+                <div class="test-case ${tc.passed ? 'pass' : 'fail'}">
+                  <div class="test-label">
+                    ${tc.passed ? '✓' : '✗'}
+                    ${tc.description || `Test ${i + 1}`}
+                    <span class="badge ${tc.passed ? 'pass' : 'fail'}">
+                      ${tc.passed ? 'PASS' : 'FAIL'}
+                    </span>
+                  </div>
+                  <div class="test-input">Input: <code>"${this.escape(tc.input)}"</code></div>
+                  <div class="test-expected">Expected: <code>${tc.expected}</code></div>
+                  <div class="test-result ${tc.passed ? 'result-pass' : 'result-fail'}">
+                    Result: <code>${tc.result}</code>
+                    ${tc.error ? `<br />Error: ${tc.error}` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+          container.insertAdjacentHTML('beforeend', html);
+        });
+
+        document.getElementById('total').textContent = this.passed + this.failed;
+        document.getElementById('passed').textContent = this.passed;
+        document.getElementById('failed').textContent = this.failed;
+      }
+
+      escape(str) {
+        return String(str).replace(/"/g, '\\"').slice(0, 50);
+      }
+    }
+
+    const runner = new TestRunner();
+
+    runner.test(
+      '1. Title Validation (Lookahead)',
+      /^(?=.{2,})(?!\s+$).+/,
+      [
+        { input: 'CS 101', expected: true, description: 'Valid title with space' },
+        { input: 'Meeting', expected: true, description: 'Valid single word' },
+        { input: 'OK', expected: true, description: 'Minimum 2 chars' },
+        { input: 'a', expected: false, description: 'Too short (1 char)' },
+        { input: '   ', expected: false, description: 'Only whitespace' },
+        { input: '  text  ', expected: true, description: 'Text with padding' }
+      ]
+    );
+
+    runner.test(
+      '2. Duration Validation (HH:MM)',
+      /^([0-9]{1,2}):([0-5][0-9])$/,
+      [
+        { input: '01:30', expected: true, description: 'Standard format' },
+        { input: '2:45', expected: true, description: 'Single digit hour' },
+        { input: '48:00', expected: true, description: 'Long duration' },
+        { input: '0:00', expected: true, description: 'Minimum' },
+        { input: '1:60', expected: false, description: 'Invalid minutes (60)' },
+        { input: 'ab:cd', expected: false, description: 'Non-numeric' },
+        { input: '1:5', expected: false, description: 'Missing leading zero' }
+      ]
+    );
+
+    runner.test(
+      '3. Date/Time Validation (ISO)',
+      /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/,
+      [
+        { input: '2025-10-17T14:30', expected: true, description: 'Valid ISO datetime' },
+        { input: '2025-01-01T00:00', expected: true, description: 'New Year' },
+        { input: '2025-12-31T23:59', expected: true, description: 'Year end' },
+        { input: '2025-10-17', expected: false, description: 'Missing time' },
+        { input: '2025/10/17T14:30', expected: false, description: 'Wrong date format' },
+        { input: '2025-10-17 14:30', expected: false, description: 'Space instead of T' }
+      ]
+    );
+
+    runner.test(
+      '4. Tag Format Validation (Unicode)',
+      /^[\p{L}\p{N}\p{Emoji}_-]{1,30}$/,
+      [
+        { input: 'urgent', expected: true, description: 'Simple tag' },
+        { input: 'CS101', expected: true, description: 'Alphanumeric' },
+        { input: 'office_hour', expected: true, description: 'With underscore' },
+        { input: 'mid-term', expected: true, description: 'With hyphen' },
+        { input: 'tag with space', expected: false, description: 'Spaces not allowed' },
+        { input: 'tag@invalid', expected: false, description: 'Special char' },
+        { input: '', expected: false, description: 'Empty string' },
+        { input: 'a'.repeat(31), expected: false, description: 'Exceeds 30 chars' }
+      ],
+      'u'
+    );
+
+    runner.test(
+      '5. Duplicate Word Detection (Back-reference)',
+      /\b(\w+)\b(?=.*\b\1\b)/,
+      [
+        { input: 'urgent urgent', expected: true, description: 'Exact duplicate' },
+        { input: 'the the project', expected: true, description: 'Duplicate at start' },
+        { input: 'meeting my meeting', expected: true, description: 'Duplicate separated' },
+        { input: 'urgent important', expected: false, description: 'No duplicates' },
+        { input: 'test', expected: false, description: 'Single word' },
+        { input: 'Team teaming', expected: false, description: 'Different words' }
+      ]
+    );
+
+    runner.test(
+      '6. Unsafe Pattern Detection',
+      /(\.\*){3,}|(\(\?:.*\|\.*\))/u,
+      [
+        { input: '.*.*.*', expected: true, description: 'Triple wildcard (unsafe)' },
+        { input: '(?:.*|.*)', expected: true, description: 'Alternation pattern (unsafe)' },
+        { input: '.*', expected: false, description: 'Single wildcard (safe)' },
+        { input: '.+', expected: false, description: 'Plus quantifier (safe)' },
+        { input: 'normal pattern', expected: false, description: 'Regular pattern (safe)' }
+      ]
+    );
+
+    runner.render();
+  </script>
+</body>
+</html>
