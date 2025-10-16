@@ -6,7 +6,7 @@ A responsive, accessible web application for managing campus tasks and events. B
 
 **Figma Design:** [View Design Mockups](https://www.figma.com/design/3rr9UMgkjUeAS2JQXtoF8C/Untitled?node-id=0-1&t=QBE1nG5NG0jLGDPU-1)
 
-**Demo Video:** [Watch My Demo](https://youtu.be/DdW-qhaprmY) *(shows keyboard navigation, regex search, import/export, stats, settings, mobile responsiveness)*
+**Demo Video:** [Watch My Demo](https://youtu.be/7gIYX0Wpbmo) *(shows keyboard navigation, regex search, import/export, stats, settings, mobile responsiveness)*
 
 ---
 
